@@ -693,6 +693,7 @@ fn submitInner(self: *Self, state: *LoopState, c: *Completion, is_new: bool) voi
                 .NOFOLLOW = !data.flags.follow_symlinks,
                 .NOCTTY = !data.flags.allow_ctty,
                 .PATH = data.flags.path_only,
+                .DIRECT = data.flags.direct,
             };
             const sqe = self.getSqeOrDefer(c) orelse return;
             if (data.flags.resolve_beneath) {
@@ -722,6 +723,7 @@ fn submitInner(self: *Self, state: *LoopState, c: *Completion, is_new: bool) voi
                 .CREAT = true,
                 .TRUNC = data.flags.truncate,
                 .EXCL = data.flags.exclusive,
+                .DIRECT = data.flags.direct,
             };
             const sqe = self.getSqeOrDefer(c) orelse return;
             if (data.flags.resolve_beneath) {
